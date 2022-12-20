@@ -7,6 +7,12 @@ class Employee
     self.boss = boss
   end
 
+  def boss=(boss)
+    @boss = boss
+    boss.add_employee(self) unless boss.nil?
+    boss
+  end
+
   def bonus(multipler)
     self.salary * multipler
   end
