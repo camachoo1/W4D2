@@ -19,6 +19,8 @@ class Board
   end
 
   def move_piece(color, start_pos, end_pos)
+    raise "nothing here" if start_pos.empty?
+    raise "can't go there...already a piece there" unless self.valid_pos?(end_pos)
 
     queue = []
     until queue.empty?
@@ -47,7 +49,7 @@ class Board
   end
 
   def pieces
-    @rows.flatten.reject { |piece| piece.empty? }
+    @rows.flatten.reject { |pos| pos.empty? }
   end
 
   def dup
