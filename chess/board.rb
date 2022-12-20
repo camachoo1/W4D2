@@ -19,6 +19,10 @@ class Board
 
   def move_piece(color, start_pos, end_pos)
 
+    queue = []
+    until queue.empty?
+        
+
   end
 
   def valid_pos?(pos)
