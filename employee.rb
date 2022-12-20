@@ -7,5 +7,7 @@ class Employee
     self.boss = boss
   end
 
-
+  def bonus(multipler)
+    self.salary * multipler
+  end
 end
