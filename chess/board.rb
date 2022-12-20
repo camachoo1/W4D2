@@ -1,7 +1,8 @@
 class Board
-
+  attr_reader :rows
   def initialize(rows, null_piece)
-    @rows = Array.new(8) { Array.new(8, null_piece) }
+    @rows = Array.new(8) { Array.new(8, @null_piece) }
+    @null_piece = NullPiece.instance
   end
 
   def [](pos)
