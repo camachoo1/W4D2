@@ -18,7 +18,7 @@ class Board
   end
 
   def move_piece(color, start_pos, end_pos)
-    
+
   end
 
   def valid_pos?(pos)
@@ -28,6 +28,25 @@ class Board
     else
         return true
     end
+  end
+
+  def add_piece(piece, pos)
+  end
+
+  def checkmate?(color)
+
+  end
+
+  def in_check?(color)
+  end
+
+  def pieces
+  end
+
+  def dup
+  end
+
+  def move_piece!(color, start_pos, end_pos)
   end
 
 
