@@ -18,12 +18,8 @@ class Piece
     false
   end
 
-  def moves
-    
-  end
-
-  def pos=(val)
-  end
+  # def pos=(val)
+  # end
 
   def symbol
   end

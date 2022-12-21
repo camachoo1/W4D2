@@ -4,6 +4,7 @@ module Steppable
   DIAGONAL_DIRS = [[-1, 1], [-1, -1], [1, 1], [1, -1]]
 
   HORIZONTAL_AND_DIAGONAL_DIRS = HORIZONTAL_DIRS + DIAGONAL_DIRS
+  
   def moves
     moves = []
     move_dirs.each { |dx, dy| moves + grow_unblocked_moves_in_dir(dx, dy) }
