@@ -10,6 +10,18 @@ module Slideable
     moves
   end
 
+  def horizontal_dirs
+    HORIZONTAL_DIRS
+  end
+
+  def diagonal_dirs
+    DIAGONAL_DIRS
+  end
+
+  def horizontal_and_diagonal_dirs
+    HORIZONTAL_AND_DIAGONAL_DIRS
+  end
+
   private
   def grow_unblocked_moves_in_dir(dx, dy)
     x, y = pos
