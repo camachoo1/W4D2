@@ -1,3 +1,5 @@
+require "./board"
+
 class Piece
   attr_reader :color, :display
   attr_accessor :pos
