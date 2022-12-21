@@ -1,7 +1,6 @@
 module Slideable
   HORIZONTAL_DIRS = [[0, -1], [0, 1], [1, 0], [-1, 0]]
   DIAGONAL_DIRS = [[-1, 1], [-1, -1], [1, 1], [1, -1]]
-
   HORIZONTAL_AND_DIAGONAL_DIRS = HORIZONTAL_DIRS + DIAGONAL_DIRS
   
   def moves

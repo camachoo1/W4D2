@@ -73,20 +73,38 @@ class Board
   end
 
 
-  # private
+  private
   attr_reader :null_piece
-  
-  #  [ pawn, pawn,   pawn,   pawn, pawn,  pawn,   pawn,   pawn]
-  #  [ rook, knight, bishop, queen, king, bishop, knight, rook ]
-  def fill_board
-    grid = Array.new(8) { Array.new(8, @null_piece) }
-    grid.each_with_index do |row, i|
-      row.each_with_index do |col, j|
-        if (i < 2 || i > 5)
-          grid[i][j] = "rook"
-        end
-      end
+  def fill_front(color)
+    front_row = Array.new(8)
+
+    if color == :black
+      i = 1
+    else
+      i = 6
     end
-    grid.each { |row| p row }
+
+    front_row.length.times { |j| self[[i, j]] = Pawn.new(color, self, [i, j]) }
+  end
+
+  def fill_back(color)
+   back_row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+
+   if color == :black
+    i = 0
+   else
+    i = 7
+   end
+
+   back_row.each_with_index { |class_piece, j| self[[i, j]] = class_piece.new(color, self, [i, j]) }
+  end
+
+  def fill_board
+    @rows = Array.new(8) { Array.new(8, null_piece) }
+    fill_front(:black)
+    fill_back(:black)
+    fill_front(:white)
+    fill_back(:white)
+    rows
   end
 end
