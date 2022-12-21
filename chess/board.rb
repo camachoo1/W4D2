@@ -51,6 +51,8 @@ class Board
   end
 
   def add_piece(piece, pos)
+    raise "already something there" unless empty?(pos)
+    
     self[pos] = piece
   end
 
