@@ -1,4 +1,3 @@
-# require "../null_piece"
 require_relative "pieces"
 
 class Board
@@ -78,7 +77,7 @@ class Board
   attr_reader :null_piece
   
   #  [ pawn, pawn,   pawn,   pawn, pawn,  pawn,   pawn,   pawn]
-  #  [ rook, knight, bishop, king, queen, bishop, knight, rook ]
+  #  [ rook, knight, bishop, queen, king, bishop, knight, rook ]
   def fill_board
     grid = Array.new(8) { Array.new(8, @null_piece) }
     grid.each_with_index do |row, i|

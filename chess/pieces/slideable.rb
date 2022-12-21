@@ -26,7 +26,7 @@ module Slideable
   def grow_unblocked_moves_in_dir(dx, dy)
     x, y = pos
     moves = []
-    while
+    while true
       x, y = x + dx, y + dy
       pos = [x, y]
 
@@ -41,6 +41,4 @@ module Slideable
     end
     moves
   end
-
-  
 end
