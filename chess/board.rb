@@ -19,11 +19,17 @@ class Board
   end
 
   def move_piece(color, start_pos, end_pos)
-    raise "nothing here" if start_pos.empty?
+    raise "nothing here" if self.empty?(start_pos)
     raise "can't go there...already a piece there" unless self.valid_pos?(end_pos)
 
-    queue = []
-    until queue.empty?
+    if piece.color != color
+      raise "not your turn"
+    elsif piece.color == color
+      self[end_pos] = piece
+      self[start_pos] = null_piece
+    end
+    # queue = []
+    # until queue.empty?
         
 
   end
