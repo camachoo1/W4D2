@@ -21,19 +21,19 @@ class Board
     rows[x][y] = piece
   end
 
-  def move_piece(start_pos, end_pos)
+  def move_piece(color, start_pos, end_pos)
     raise "nothing here" if self.empty?(start_pos)
     raise "can't go there...already a piece there" unless self.valid_pos?(end_pos)
 
-    # if piece.color != color
-    #   raise "not your turn"
-    # if piece.color == color
-      piece = self[start_pos]
-      self[end_pos] = piece
-      self[start_pos] = null_piece
-    # end
-    # queue = []
-    # until queue.empty?
+    piece = self[start_pos]
+    raise "not your turn" if piece.color != color
+    raise "you cant move like that" unless piece.moves.include?(end_pos)
+    raise "cant put yourself in check" unless piece.valid_moves.include?(end_pos)
+
+    piece = self[start_pos]
+    self[end_pos] = piece
+    self[start_pos] = null_piece
+    piece.pos = end_pos
   end
 
   def empty?(pos)
@@ -55,11 +55,6 @@ class Board
     self[pos] = piece
   end
 
-
-  # Then write a #checkmate?(color) method. If the player is in check, and if none of the player's pieces have any #valid_moves (to be implemented in a moment), then the player is in checkmate.
-  # 1 King cant move away from position of check
-  # 2 other cant also move another piece in front of the king to avoid the check.a
-
   def checkmate?(color)
     return false unless in_check?(color)
     same_color_pieces = pieces.select { |piece| piece.color == color }
@@ -75,12 +70,6 @@ class Board
     @rows.flatten.reject { |pos| pos.empty? }
   end
 
-  def dup
-  end
-
-  def move_piece!(color, start_pos, end_pos)
-  end
-
 
   private
   attr_reader :null_piece
@@ -91,26 +80,14 @@ class Board
 
   def fill_front(color)
     front_row = Array.new(8)
-
-    if color == :black
-      i = 1
-    else
-      i = 6
-    end
-
+    color == :black ? i = 1 : i = 6
     front_row.length.times { |j| self[[i, j]] = Pawn.new(color, self, [i, j]) }
   end
 
   def fill_back(color)
-   back_row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
-
-   if color == :black
-    i = 0
-   else
-    i = 7
-   end
-
-   back_row.each_with_index { |class_piece, j| self[[i, j]] = class_piece.new(color, self, [i, j]) }
+    back_row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+    color == :black ? i = 0 : i = 7
+    back_row.each_with_index { |class_piece, j| self[[i, j]] = class_piece.new(color, self, [i, j]) }
   end
 
   def fill_board
