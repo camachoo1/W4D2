@@ -5,7 +5,7 @@ class King < Piece
   include Steppable
    
   def symbol
-    "King"
+    '♚'
   end
   
   protected

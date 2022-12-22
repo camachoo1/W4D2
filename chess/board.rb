@@ -55,11 +55,20 @@ class Board
     self[pos] = piece
   end
 
-  def checkmate?(color)
 
+  # Then write a #checkmate?(color) method. If the player is in check, and if none of the player's pieces have any #valid_moves (to be implemented in a moment), then the player is in checkmate.
+  # 1 King cant move away from position of check
+  # 2 other cant also move another piece in front of the king to avoid the check.a
+
+  def checkmate?(color)
+    return false unless in_check?(color)
+    same_color_pieces = pieces.select { |piece| piece.color == color }
+    same_color_pieces.all? { |piece| piece.valid_moves.empty? }
   end
 
   def in_check?(color)
+    king_pos = where_is_king(color).pos
+    pieces.any? { |piece| piece.moves.include?(king_pos) && piece.color != color }
   end
 
   def pieces
@@ -75,6 +84,11 @@ class Board
 
   private
   attr_reader :null_piece
+
+  def where_is_king(color)
+    pieces.select { |piece| piece.is_a?(King) && piece.color == color }
+  end
+
   def fill_front(color)
     front_row = Array.new(8)
 

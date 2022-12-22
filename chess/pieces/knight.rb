@@ -5,7 +5,7 @@ class Knight < Piece
   include Steppable
 
   def symbol
-    "K"
+    '♞'
   end
 
   protected
